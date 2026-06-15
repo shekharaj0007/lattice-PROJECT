@@ -1,5 +1,7 @@
 LatticeFlow — EDM Lattice Circularity Predictor
 
+LIVE DEPLOYMENT AT ------https://lattice-project.onrender.com/
+
 
 Predict the circularity of EDM-machined holes in metallic lattice structures using Machine Learning, Gaussian Process Regression, and geometric analysis.
 
