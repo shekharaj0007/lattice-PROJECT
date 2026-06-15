@@ -1,0 +1,10 @@
+Phase,Use_SEM_images,Position,Peak_Current_A,Pulse_On_Time_us,Duty_Factor_pct,Pore_diameter_um,Tool_diameter_um,Priority,Notes
+1,Yes,Unknown,4,150,80,235.6,900,PRIMARY,Run 4 - tool/pore ratio 3.82
+1,Yes,Unknown,3.5,150,80,235.6,900,Secondary,Softer for small pore
+1,Yes,Unknown,4,140,78,235.6,900,Secondary,Near Run 4
+1,No,Unknown,6,50,64,235.6,900,Not recommended,Deviation only - breaks boundary
+2,Yes,Center,4,150,80,235.6,900,PRIMARY,Pore center in 500um cell
+2,Yes,Near strut,3.5,150,78,235.6,900,PRIMARY,900um tool near 500um strut
+2,Yes,Near node_0_0,3.5,145,76,235.6,900,PRIMARY,Corner reference
+2,Yes,Mid pore,4,148,79,235.6,900,Secondary,Between center and strut
+2,No,Center,6,100,64,235.6,900,Not recommended,No SEM validation

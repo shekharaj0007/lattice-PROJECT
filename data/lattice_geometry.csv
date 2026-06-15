@@ -1,0 +1,11 @@
+parameter,value_um,source,notes
+unit_cell_side,500,SEM scale bar / user calculation,Width of square unit cell
+pore_diameter,235.6,user calculation,3x = 500*sqrt(2); x = 235.6 um
+node_diameter_assumed,235.6,user assumption,pore diameter = node diameter = x
+unit_cell_diagonal,707.1,calculated,500 * sqrt(2)
+tool_tip_diameter,900,lab document / handwritten notes,EDM electrode
+tool_to_pore_diameter_ratio,3.82,calculated,900 / 235.6 - tool much larger than pore
+pore_radius,117.8,calculated,235.6 / 2
+tool_radius,450,calculated,900 / 2
+working_area_3x3_cells,1500,calculated,3 unit cells for 900 um tool footprint
+clearance_if_centered,-332.2,calculated,tool_radius - pore_radius (overlap into nodes/struts)

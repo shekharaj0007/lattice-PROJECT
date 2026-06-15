@@ -1,0 +1,17 @@
+Run,Boundary_circularity_1to5,Supporting_boundary_intact,Nodes_damaged_ok,Notes
+1,1,0,1,Irregular boundary; supporting material destroyed
+2,2,0,1,Not circular; boundary damaged
+3,1,0,1,Irregular; supporting destroyed
+4,5,1,1,TARGET: nearly circular hole; supporting material forms circular boundary (SEM reference)
+5,2,0,1,Lower deviation numbers but boundary not circular in SEM
+6,2,0,1,Boundary irregular in SEM
+7,1,0,1,Highly irregular; supporting destroyed
+8,2,0,1,Asymmetric; boundary not circular
+9,2,0,1,Moderate but boundary irregular
+10,1,0,1,Elongated irregular hole; supporting destroyed
+11,1,0,1,Irregular boundary
+12,2,0,1,Similar top/bottom deviation but SEM shows non-circular boundary
+13,1,0,1,Irregular; supporting destroyed
+14,2,0,1,Boundary not circular
+15,2,0,1,Boundary not circular
+16,1,0,1,Highly irregular despite low bottom deviation

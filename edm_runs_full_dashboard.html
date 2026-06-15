@@ -1,0 +1,312 @@
+
+<h2 class="sr-only">EDM experiment dashboard — 16 runs compared across circularity, deviation, asymmetry and parameter effects</h2>
+
+<style>
+  .dash { padding: 1rem 0; font-family: var(--font-sans); }
+  .tab-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .tab-btn { padding: 6px 14px; font-size: 13px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; }
+  .tab-btn.active { background: var(--color-background-tertiary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
+  .section { display: none; }
+  .section.visible { display: block; }
+  .chart-wrap { position: relative; width: 100%; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 12px; color: var(--color-text-secondary); }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .legend-sq { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+  .metric-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px; }
+  .metric-val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+  .metric-sub { font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0 0; }
+</style>
+
+<div class="dash">
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showTab('deviation')">Deviation comparison</button>
+    <button class="tab-btn" onclick="showTab('params')">Parameter effects</button>
+    <button class="tab-btn" onclick="showTab('scatter')">Circularity vs deviation</button>
+    <button class="tab-btn" onclick="showTab('asym')">Asymmetry analysis</button>
+  </div>
+
+  <div id="overview" class="section visible">
+    <div class="metric-row">
+      <div class="metric"><p class="metric-label">Only SEM pass</p><p class="metric-val">Run 4</p><p class="metric-sub">4A · 150µs · 80%</p></div>
+      <div class="metric"><p class="metric-label">Best visual circ</p><p class="metric-val">0.80</p><p class="metric-sub">Run 5 — but FAIL</p></div>
+      <div class="metric"><p class="metric-label">Worst asymmetry</p><p class="metric-val">Run 16</p><p class="metric-sub">158% — 10A · 150µs</p></div>
+      <div class="metric"><p class="metric-label">Best deviation score</p><p class="metric-val">Run 5</p><p class="metric-sub">205.3µm — still FAIL</p></div>
+    </div>
+    <div class="legend">
+      <span><span class="legend-sq" style="background:#2d8a4e"></span>SEM pass</span>
+      <span><span class="legend-sq" style="background:#4a9fd4"></span>Visual circ ≥0.75</span>
+      <span><span class="legend-sq" style="background:#e89c2f"></span>Visual circ 0.55–0.74</span>
+      <span><span class="legend-sq" style="background:#c94040"></span>Visual circ &lt;0.55 / N/A</span>
+    </div>
+    <div class="chart-wrap" style="height:320px"><canvas id="c1" role="img" aria-label="Bar chart of visual circularity scores for all 16 EDM runs">Run 5 has highest visual circularity at 0.80 but fails SEM. Run 4 is the only SEM pass.</canvas></div>
+  </div>
+
+  <div id="deviation" class="section">
+    <div class="legend">
+      <span><span class="legend-sq" style="background:#4a9fd4"></span>Dev top (µm)</span>
+      <span><span class="legend-sq" style="background:#c97a30;border:1px dashed #c97a30"></span>Dev bottom (µm)</span>
+    </div>
+    <div class="chart-wrap" style="height:320px"><canvas id="c2" role="img" aria-label="Grouped bar chart comparing top and bottom deviation measurements across 16 runs">Run 8 and 16 show extreme gaps between top and bottom deviation. Run 4 shows most balanced deviation.</canvas></div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">Large gap between top and bottom bars = high asymmetry = lopsided hole.</p>
+  </div>
+
+  <div id="params" class="section">
+    <div class="legend">
+      <span><span class="legend-sq" style="background:#3266ad"></span>4A runs</span>
+      <span><span class="legend-sq" style="background:#2d8a4e"></span>6A runs</span>
+      <span><span class="legend-sq" style="background:#c97a30"></span>8A runs</span>
+      <span><span class="legend-sq" style="background:#c94040"></span>10A runs</span>
+    </div>
+    <div class="chart-wrap" style="height:280px"><canvas id="c3" role="img" aria-label="Bar chart showing mean deviation grouped by current level">Higher current generally produces worse boundary outcomes despite sometimes better circularity metrics.</canvas></div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">Mean deviation by current (A). Note 4A group contains the only SEM pass (Run 4).</p>
+    <div style="margin-top:1.5rem">
+    <div class="legend">
+      <span><span class="legend-sq" style="background:#3266ad"></span>50µs</span>
+      <span><span class="legend-sq" style="background:#2d8a4e"></span>75µs</span>
+      <span><span class="legend-sq" style="background:#c97a30"></span>100µs</span>
+      <span><span class="legend-sq" style="background:#7b5ea7"></span>150µs</span>
+    </div>
+    <div class="chart-wrap" style="height:280px"><canvas id="c4" role="img" aria-label="Bar chart showing mean top deviation and bottom deviation grouped by pulse-on time">150µs pulse-on time shows the most balanced top/bottom deviation profile.</canvas></div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">Mean top vs bottom deviation by pulse-on time (µs). 150µs group is most balanced — key to Run 4 success.</p>
+    </div>
+  </div>
+
+  <div id="scatter" class="section">
+    <div class="legend">
+      <span><span class="legend-sq" style="background:#2d8a4e"></span>SEM pass</span>
+      <span><span class="legend-sq" style="background:#c94040"></span>SEM fail</span>
+    </div>
+    <div class="chart-wrap" style="height:340px"><canvas id="c5" role="img" aria-label="Scatter chart plotting deviation score vs visual circularity for all runs with SEM result colour coding">Run 5 is top-left (best circularity, best visual) but fails. Run 4 is bottom-right area (worst deviation) but passes.</canvas></div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">Each point = one run. Lower deviation + higher visual circularity does NOT guarantee SEM pass.</p>
+  </div>
+
+  <div id="asym" class="section">
+    <div class="legend">
+      <span><span class="legend-sq" style="background:#c94040"></span>&gt;100µm asymmetry</span>
+      <span><span class="legend-sq" style="background:#e89c2f"></span>50–100µm</span>
+      <span><span class="legend-sq" style="background:#4a9fd4"></span>&lt;50µm</span>
+    </div>
+    <div class="chart-wrap" style="height:360px"><canvas id="c6" role="img" aria-label="Horizontal bar chart showing absolute asymmetry (difference between top and bottom deviation) for all 16 runs">Run 16 has worst asymmetry at 205µm. Run 12 has best at 3µm but still fails SEM.</canvas></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const runs = [
+  {r:1,  I:4,  T:50,  D:56, dt:231.6, db:213.9, vis:null, pass:false},
+  {r:2,  I:4,  T:75,  D:64, dt:217.8, db:199.1, vis:0.60, pass:false},
+  {r:3,  I:4,  T:100, D:72, dt:230.2, db:212.1, vis:0.78, pass:false},
+  {r:4,  I:4,  T:150, D:80, dt:270.6, db:213.0, vis:null, pass:true},
+  {r:5,  I:6,  T:50,  D:64, dt:205.3, db:143.4, vis:0.80, pass:false},
+  {r:6,  I:6,  T:75,  D:56, dt:225.4, db:172.7, vis:0.52, pass:false},
+  {r:7,  I:6,  T:100, D:80, dt:280.5, db:130.0, vis:null, pass:false},
+  {r:8,  I:6,  T:150, D:72, dt:219.7, db:53.9,  vis:null, pass:false},
+  {r:9,  I:8,  T:50,  D:72, dt:240.2, db:96.4,  vis:0.76, pass:false},
+  {r:10, I:8,  T:75,  D:80, dt:260.5, db:122.9, vis:null, pass:false},
+  {r:11, I:8,  T:100, D:56, dt:240.3, db:213.7, vis:null, pass:false},
+  {r:12, I:8,  T:150, D:64, dt:216.7, db:213.9, vis:0.67, pass:false},
+  {r:13, I:10, T:50,  D:80, dt:238.6, db:122.4, vis:0.57, pass:false},
+  {r:14, I:10, T:75,  D:72, dt:251.6, db:155.4, vis:0.37, pass:false},
+  {r:15, I:10, T:100, D:64, dt:227.1, db:204.6, vis:0.27, pass:false},
+  {r:16, I:10, T:150, D:56, dt:231.9, db:26.4,  vis:0.35, pass:false},
+];
+
+const labels = runs.map(d => `R${d.r}`);
+
+function barColor(d) {
+  if (d.pass) return '#2d8a4e';
+  if (d.vis !== null && d.vis >= 0.75) return '#4a9fd4';
+  if (d.vis !== null && d.vis >= 0.55) return '#e89c2f';
+  return '#c94040';
+}
+
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+const tickColor = isDark ? '#aaa' : '#666';
+
+const baseOpts = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false }, tooltip: { callbacks: {} } },
+  scales: {
+    x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 } } },
+    y: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 } } }
+  }
+};
+
+function merge(a, b) { return JSON.parse(JSON.stringify(Object.assign({}, a, b))); }
+
+new Chart(document.getElementById('c1'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Visual circularity',
+      data: runs.map(d => d.vis !== null ? d.vis : 0.42),
+      backgroundColor: runs.map(d => barColor(d)),
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...baseOpts,
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 } } },
+      y: { min: 0, max: 1, grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 }, callback: v => v.toFixed(2) } }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: {
+        label: ctx => {
+          const d = runs[ctx.dataIndex];
+          const v = d.vis !== null ? `Visual circ: ${d.vis.toFixed(2)}` : 'Visual circ: N/A';
+          return [v, d.pass ? '✓ SEM PASS' : '✗ SEM FAIL', `${d.I}A · ${d.T}µs · ${d.D}%`];
+        }
+      }}
+    }
+  }
+});
+
+new Chart(document.getElementById('c2'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [
+      { label: 'Dev top', data: runs.map(d => d.dt), backgroundColor: '#4a9fd4', borderWidth: 0 },
+      { label: 'Dev bottom', data: runs.map(d => d.db), backgroundColor: '#c97a30', borderWidth: 0, borderDash: [4,2] }
+    ]
+  },
+  options: {
+    ...baseOpts,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: {
+        label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}µm`
+      }}
+    },
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 } } },
+      y: { min: 0, max: 320, grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 }, callback: v => v+'µm' } }
+    }
+  }
+});
+
+const currents = [4,6,8,10];
+const pulses = [50,75,100,150];
+const cColors = ['#3266ad','#2d8a4e','#c97a30','#c94040'];
+const pColors = ['#3266ad','#2d8a4e','#c97a30','#7b5ea7'];
+
+new Chart(document.getElementById('c3'), {
+  type: 'bar',
+  data: {
+    labels: currents.map(c => `${c}A`),
+    datasets: [{
+      label: 'Mean deviation',
+      data: currents.map(c => {
+        const g = runs.filter(d => d.I === c);
+        return +(g.reduce((a,d) => a + (d.dt+d.db)/2, 0) / g.length).toFixed(1);
+      }),
+      backgroundColor: cColors, borderWidth: 0,
+    }]
+  },
+  options: { ...baseOpts,
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 12 } } },
+      y: { min: 100, grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 }, callback: v => v+'µm' } }
+    },
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `Mean dev: ${ctx.parsed.y}µm` }}}
+  }
+});
+
+new Chart(document.getElementById('c4'), {
+  type: 'bar',
+  data: {
+    labels: pulses.map(p => `${p}µs`),
+    datasets: [
+      { label: 'Mean top', data: pulses.map(p => +(runs.filter(d=>d.T===p).reduce((a,d)=>a+d.dt,0)/4).toFixed(1)), backgroundColor: pColors, borderWidth: 0 },
+      { label: 'Mean bottom', data: pulses.map(p => +(runs.filter(d=>d.T===p).reduce((a,d)=>a+d.db,0)/4).toFixed(1)), backgroundColor: pColors.map(c=>c+'88'), borderWidth: 0 },
+    ]
+  },
+  options: { ...baseOpts,
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 12 } } },
+      y: { min: 50, grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 }, callback: v => v+'µm' } }
+    },
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}µm` }}}
+  }
+});
+
+new Chart(document.getElementById('c5'), {
+  type: 'scatter',
+  data: {
+    datasets: [{
+      label: 'Runs',
+      data: runs.map(d => ({ x: d.vis !== null ? d.vis : 0.42, y: (d.dt+d.db)/2, label: `R${d.r}` })),
+      backgroundColor: runs.map(d => d.pass ? '#2d8a4e' : '#c94040'),
+      pointRadius: 7,
+      pointHoverRadius: 9,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: {
+        label: ctx => {
+          const d = runs[ctx.dataIndex];
+          return [`R${d.r}: ${d.I}A · ${d.T}µs · ${d.D}%`, `Visual circ: ${d.vis !== null ? d.vis.toFixed(2) : 'N/A'}`, `Mean dev: ${((d.dt+d.db)/2).toFixed(1)}µm`, d.pass ? '✓ SEM PASS' : '✗ SEM FAIL'];
+        }
+      }},
+      afterDraw: chart => {
+        const ctx2 = chart.ctx;
+        chart.data.datasets[0].data.forEach((pt, i) => {
+          const meta = chart.getDatasetMeta(0).data[i];
+          ctx2.fillStyle = isDark ? '#ddd' : '#333';
+          ctx2.font = '10px sans-serif';
+          ctx2.fillText(`R${runs[i].r}`, meta.x + 5, meta.y - 5);
+        });
+      }
+    },
+    scales: {
+      x: { min: 0.2, max: 0.9, title: { display: true, text: 'Visual circularity (higher = rounder hole)', color: tickColor, font: { size: 11 } }, grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 } } },
+      y: { min: 80, max: 290, title: { display: true, text: 'Mean deviation µm (lower = closer to ideal)', color: tickColor, font: { size: 11 } }, grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 }, callback: v => v+'µm' } }
+    }
+  }
+});
+
+const asym = runs.map(d => +Math.abs(d.dt - d.db).toFixed(1));
+const asymColors = asym.map(v => v > 100 ? '#c94040' : v > 50 ? '#e89c2f' : '#4a9fd4');
+
+new Chart(document.getElementById('c6'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{ label: 'Asymmetry', data: asym, backgroundColor: asymColors, borderWidth: 0 }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: {
+        label: ctx => {
+          const d = runs[ctx.dataIndex];
+          return [`Asymmetry: ${ctx.parsed.x.toFixed(1)}µm`, `${d.I}A · ${d.T}µs · ${d.D}%`, d.pass ? '✓ SEM PASS' : '✗ SEM FAIL'];
+        }
+      }}
+    },
+    scales: {
+      y: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 } } },
+      x: { min: 0, grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 }, callback: v => v+'µm' } }
+    }
+  }
+});
+
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  event.target.classList.add('active');
+}
+</script>

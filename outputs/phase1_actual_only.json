@@ -1,0 +1,312 @@
+{
+  "success_criterion": "Maximize circularity of supporting-material boundary around hole. Nodes may be damaged. Run 4 SEM is the reference.",
+  "reference_run": 4,
+  "reference_parameters": {
+    "Peak_Current_A": 4.0,
+    "Pulse_On_Time_us": 150.0,
+    "Duty_Factor_pct": 80.0
+  },
+  "warning": "Do NOT rank experiments by Hole_Dev_Top/Bottom alone. Run 4 has highest top deviation but best SEM circular boundary.",
+  "ranking_by_SEM": [
+    {
+      "Run": 4,
+      "Peak_Current_A": 4.0,
+      "Pulse_On_Time_us": 150.0,
+      "Duty_Factor_pct": 80.0,
+      "Hole_Dev_Top_um": 270.55,
+      "Hole_Dev_Bottom_um": 213.04,
+      "boundary_circularity_1to5": 5,
+      "supporting_boundary_intact": 1,
+      "is_reference_success": true,
+      "notes": "TARGET: nearly circular hole; supporting material forms circular boundary (SEM reference)"
+    },
+    {
+      "Run": 8,
+      "Peak_Current_A": 6.0,
+      "Pulse_On_Time_us": 150.0,
+      "Duty_Factor_pct": 72.0,
+      "Hole_Dev_Top_um": 219.68,
+      "Hole_Dev_Bottom_um": 53.86,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Asymmetric; boundary not circular"
+    },
+    {
+      "Run": 9,
+      "Peak_Current_A": 8.0,
+      "Pulse_On_Time_us": 50.0,
+      "Duty_Factor_pct": 72.0,
+      "Hole_Dev_Top_um": 240.17,
+      "Hole_Dev_Bottom_um": 96.38,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Moderate but boundary irregular"
+    },
+    {
+      "Run": 5,
+      "Peak_Current_A": 6.0,
+      "Pulse_On_Time_us": 50.0,
+      "Duty_Factor_pct": 64.0,
+      "Hole_Dev_Top_um": 205.29,
+      "Hole_Dev_Bottom_um": 143.39,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Lower deviation numbers but boundary not circular in SEM"
+    },
+    {
+      "Run": 6,
+      "Peak_Current_A": 6.0,
+      "Pulse_On_Time_us": 75.0,
+      "Duty_Factor_pct": 56.0,
+      "Hole_Dev_Top_um": 225.36,
+      "Hole_Dev_Bottom_um": 172.72,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Boundary irregular in SEM"
+    },
+    {
+      "Run": 14,
+      "Peak_Current_A": 10.0,
+      "Pulse_On_Time_us": 75.0,
+      "Duty_Factor_pct": 72.0,
+      "Hole_Dev_Top_um": 251.62,
+      "Hole_Dev_Bottom_um": 155.43,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Boundary not circular"
+    },
+    {
+      "Run": 2,
+      "Peak_Current_A": 4.0,
+      "Pulse_On_Time_us": 75.0,
+      "Duty_Factor_pct": 64.0,
+      "Hole_Dev_Top_um": 217.78,
+      "Hole_Dev_Bottom_um": 199.06,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Not circular; boundary damaged"
+    },
+    {
+      "Run": 12,
+      "Peak_Current_A": 8.0,
+      "Pulse_On_Time_us": 150.0,
+      "Duty_Factor_pct": 64.0,
+      "Hole_Dev_Top_um": 213.86,
+      "Hole_Dev_Bottom_um": 216.67,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Similar top/bottom deviation but SEM shows non-circular boundary"
+    },
+    {
+      "Run": 15,
+      "Peak_Current_A": 10.0,
+      "Pulse_On_Time_us": 100.0,
+      "Duty_Factor_pct": 64.0,
+      "Hole_Dev_Top_um": 227.14,
+      "Hole_Dev_Bottom_um": 204.55,
+      "boundary_circularity_1to5": 2,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Boundary not circular"
+    },
+    {
+      "Run": 16,
+      "Peak_Current_A": 10.0,
+      "Pulse_On_Time_us": 150.0,
+      "Duty_Factor_pct": 56.0,
+      "Hole_Dev_Top_um": 231.89,
+      "Hole_Dev_Bottom_um": 26.84,
+      "boundary_circularity_1to5": 1,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Highly irregular despite low bottom deviation"
+    },
+    {
+      "Run": 13,
+      "Peak_Current_A": 10.0,
+      "Pulse_On_Time_us": 50.0,
+      "Duty_Factor_pct": 80.0,
+      "Hole_Dev_Top_um": 238.61,
+      "Hole_Dev_Bottom_um": 122.43,
+      "boundary_circularity_1to5": 1,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Irregular; supporting destroyed"
+    },
+    {
+      "Run": 10,
+      "Peak_Current_A": 8.0,
+      "Pulse_On_Time_us": 75.0,
+      "Duty_Factor_pct": 80.0,
+      "Hole_Dev_Top_um": 260.48,
+      "Hole_Dev_Bottom_um": 122.89,
+      "boundary_circularity_1to5": 1,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Elongated irregular hole; supporting destroyed"
+    },
+    {
+      "Run": 7,
+      "Peak_Current_A": 6.0,
+      "Pulse_On_Time_us": 100.0,
+      "Duty_Factor_pct": 80.0,
+      "Hole_Dev_Top_um": 280.53,
+      "Hole_Dev_Bottom_um": 130.03,
+      "boundary_circularity_1to5": 1,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Highly irregular; supporting destroyed"
+    },
+    {
+      "Run": 3,
+      "Peak_Current_A": 4.0,
+      "Pulse_On_Time_us": 100.0,
+      "Duty_Factor_pct": 72.0,
+      "Hole_Dev_Top_um": 230.15,
+      "Hole_Dev_Bottom_um": 212.08,
+      "boundary_circularity_1to5": 1,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Irregular; supporting destroyed"
+    },
+    {
+      "Run": 1,
+      "Peak_Current_A": 4.0,
+      "Pulse_On_Time_us": 50.0,
+      "Duty_Factor_pct": 56.0,
+      "Hole_Dev_Top_um": 231.56,
+      "Hole_Dev_Bottom_um": 213.91,
+      "boundary_circularity_1to5": 1,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Irregular boundary; supporting material destroyed"
+    },
+    {
+      "Run": 11,
+      "Peak_Current_A": 8.0,
+      "Pulse_On_Time_us": 100.0,
+      "Duty_Factor_pct": 56.0,
+      "Hole_Dev_Top_um": 240.25,
+      "Hole_Dev_Bottom_um": 213.69,
+      "boundary_circularity_1to5": 1,
+      "supporting_boundary_intact": 0,
+      "is_reference_success": false,
+      "notes": "Irregular boundary"
+    }
+  ],
+  "gp_recommendations_maximize_circularity": [
+    {
+      "Peak_Current_A": 4.43,
+      "Pulse_On_Time_us": 149.7,
+      "Duty_Factor_pct": 80.0,
+      "predicted_boundary_circularity_1to5": 4.94,
+      "uncertainty": 0.18
+    },
+    {
+      "Peak_Current_A": 4.12,
+      "Pulse_On_Time_us": 149.5,
+      "Duty_Factor_pct": 79.8,
+      "predicted_boundary_circularity_1to5": 4.93,
+      "uncertainty": 0.198
+    },
+    {
+      "Peak_Current_A": 4.66,
+      "Pulse_On_Time_us": 149.8,
+      "Duty_Factor_pct": 80.0,
+      "predicted_boundary_circularity_1to5": 4.9,
+      "uncertainty": 0.237
+    },
+    {
+      "Peak_Current_A": 3.59,
+      "Pulse_On_Time_us": 149.9,
+      "Duty_Factor_pct": 79.3,
+      "predicted_boundary_circularity_1to5": 4.88,
+      "uncertainty": 0.262
+    },
+    {
+      "Peak_Current_A": 4.81,
+      "Pulse_On_Time_us": 149.8,
+      "Duty_Factor_pct": 80.0,
+      "predicted_boundary_circularity_1to5": 4.86,
+      "uncertainty": 0.283
+    },
+    {
+      "Peak_Current_A": 3.58,
+      "Pulse_On_Time_us": 149.6,
+      "Duty_Factor_pct": 79.2,
+      "predicted_boundary_circularity_1to5": 4.82,
+      "uncertainty": 0.315
+    },
+    {
+      "Peak_Current_A": 4.21,
+      "Pulse_On_Time_us": 149.1,
+      "Duty_Factor_pct": 79.5,
+      "predicted_boundary_circularity_1to5": 4.78,
+      "uncertainty": 0.346
+    },
+    {
+      "Peak_Current_A": 4.57,
+      "Pulse_On_Time_us": 149.0,
+      "Duty_Factor_pct": 79.8,
+      "predicted_boundary_circularity_1to5": 4.72,
+      "uncertainty": 0.39
+    },
+    {
+      "Peak_Current_A": 3.57,
+      "Pulse_On_Time_us": 149.7,
+      "Duty_Factor_pct": 78.9,
+      "predicted_boundary_circularity_1to5": 4.72,
+      "uncertainty": 0.388
+    },
+    {
+      "Peak_Current_A": 4.23,
+      "Pulse_On_Time_us": 148.8,
+      "Duty_Factor_pct": 80.0,
+      "predicted_boundary_circularity_1to5": 4.69,
+      "uncertainty": 0.41
+    },
+    {
+      "Peak_Current_A": 5.3,
+      "Pulse_On_Time_us": 149.5,
+      "Duty_Factor_pct": 79.9,
+      "predicted_boundary_circularity_1to5": 4.64,
+      "uncertainty": 0.442
+    },
+    {
+      "Peak_Current_A": 4.01,
+      "Pulse_On_Time_us": 149.1,
+      "Duty_Factor_pct": 78.9,
+      "predicted_boundary_circularity_1to5": 4.63,
+      "uncertainty": 0.445
+    },
+    {
+      "Peak_Current_A": 4.03,
+      "Pulse_On_Time_us": 149.1,
+      "Duty_Factor_pct": 78.9,
+      "predicted_boundary_circularity_1to5": 4.61,
+      "uncertainty": 0.453
+    },
+    {
+      "Peak_Current_A": 4.25,
+      "Pulse_On_Time_us": 149.6,
+      "Duty_Factor_pct": 78.6,
+      "predicted_boundary_circularity_1to5": 4.59,
+      "uncertainty": 0.462
+    },
+    {
+      "Peak_Current_A": 3.96,
+      "Pulse_On_Time_us": 149.6,
+      "Duty_Factor_pct": 78.5,
+      "predicted_boundary_circularity_1to5": 4.57,
+      "uncertainty": 0.474
+    }
+  ],
+  "loocv_mae_circularity_1to5": 1.0199655424467018
+}

@@ -1,0 +1,23 @@
+{
+  "geometry": {
+    "unit_cell_side_um": 500,
+    "pore_diameter_um": 235.6,
+    "node_diameter_assumed_um": 235.6,
+    "tool_tip_diameter_um": 900,
+    "tool_to_pore_ratio": 3.82,
+    "working_area_3x3_um": 1500,
+    "calculation": "3x = 500*sqrt(2), x = 235.6 um"
+  },
+  "only_lab_success_run": 4,
+  "phase1_unknown_position": {
+    "without_SEM_images": {"Peak_Current_A": 6, "Pulse_On_Time_us": 50, "Duty_Factor_pct": 64, "trust": "low"},
+    "with_SEM_images": {"Peak_Current_A": 4, "Pulse_On_Time_us": 150, "Duty_Factor_pct": 80, "trust": "high"}
+  },
+  "phase2_known_position": {
+    "without_SEM_images": {"center": {"Peak_Current_A": 6, "Pulse_On_Time_us": 100, "Duty_Factor_pct": 64}},
+    "with_SEM_images": {
+      "center": {"Peak_Current_A": 4, "Pulse_On_Time_us": 150, "Duty_Factor_pct": 80},
+      "near_strut": {"Peak_Current_A": 3.5, "Pulse_On_Time_us": 150, "Duty_Factor_pct": 78}
+    }
+  }
+}

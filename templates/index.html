@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <title>LatticeFlow · EDM Analysis</title>
+  <script src="/static/js/theme.js?v=7"></script>
+  <link rel="stylesheet" href="/static/css/style.css?v=7" />
+</head>
+<body>
+  <div class="build-tag">UI v5</div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-block">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-title">LatticeFlow</div>
+          <div class="logo-sub">EDM Circularity Analysis</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="theme-toggle" role="group" aria-label="Color theme">
+          <button type="button" class="theme-btn active" data-theme="light" aria-pressed="true" title="Light theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <span>Light</span>
+          </button>
+          <button type="button" class="theme-btn" data-theme="dark" aria-pressed="false" title="Dark theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <span>Dark</span>
+          </button>
+        </div>
+        <div class="header-criteria">
+          <div class="criteria-pill"><span>Score</span><strong>≥ 3.5 / 5</strong></div>
+          <div class="criteria-pill"><span>Ratio</span><strong>≥ 0.70</strong></div>
+          <div class="criteria-pill criteria-ok"><span>Ring</span><strong>Intact</strong></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-body">
+    <aside class="config-panel">
+      <div class="panel-head">
+        <h1>Run Configuration</h1>
+        <p>Enter all machining parameters manually.</p>
+      </div>
+
+      <form id="analyze-form" autocomplete="off">
+        <fieldset class="fieldset">
+          <legend>EDM Process</legend>
+          <div class="fields-row">
+            <label class="fld">
+              <span>Peak Current (A)</span>
+              <input type="number" id="peak_current" step="any" placeholder="4.0" required />
+            </label>
+            <label class="fld">
+              <span>Pulse-On (µs)</span>
+              <input type="number" id="pulse_on" step="any" placeholder="150" required />
+            </label>
+            <label class="fld">
+              <span>Duty (%)</span>
+              <input type="number" id="duty" step="any" placeholder="80" required />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Geometry</legend>
+          <div class="fields-row">
+            <label class="fld">
+              <span>Tool Diameter (µm)</span>
+              <select id="tool_diameter" required>
+                <option value="" disabled selected>Select tool size</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700">700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="1000">1000</option>
+                <option value="1100">1100</option>
+                <option value="1200">1200</option>
+                <option value="1300">1300</option>
+                <option value="1400">1400</option>
+                <option value="1500">1500</option>
+              </select>
+            </label>
+            <label class="fld">
+              <span>Pore Diameter (µm)</span>
+              <input type="number" id="pore_diameter" step="any" min="1" placeholder="235.6" required />
+            </label>
+            <label class="fld">
+              <span>Working Area (µm)</span>
+              <input type="number" id="working_area" step="any" min="1" placeholder="1500" required />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Tool Position</legend>
+          <p class="field-hint" id="position-hint">Set geometry above for valid range</p>
+          <div class="fields-row fields-row-2">
+            <label class="fld">
+              <span>Center X (µm)</span>
+              <input type="number" id="tool_x" step="any" placeholder="X" required />
+            </label>
+            <label class="fld">
+              <span>Center Y (µm)</span>
+              <input type="number" id="tool_y" step="any" placeholder="Y" required />
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="constraints-box" id="geo-strip">
+          <div class="constraints-title">Position Constraints</div>
+          <table class="constraints-table">
+            <tbody>
+              <tr><td>Tool radius</td><td id="live-radius">—</td></tr>
+              <tr><td>Tool / pore ratio</td><td id="live-ratio">—</td></tr>
+              <tr><td>Valid X range</td><td id="live-x">—</td></tr>
+              <tr><td>Valid Y range</td><td id="live-y">—</td></tr>
+            </tbody>
+          </table>
+          <p class="constraints-note" id="live-formula">Valid range = [tool_radius , working_area − tool_radius]</p>
+        </div>
+
+        <div class="form-btns">
+          <button type="submit" class="btn btn-main" id="btn-run">
+            <span class="btn-text">Analyze</span>
+            <span class="spinner hidden"></span>
+          </button>
+          <button type="button" class="btn btn-alt" id="btn-grid">Grid Scan</button>
+        </div>
+        <div id="error" class="msg-error hidden"></div>
+      </form>
+    </aside>
+
+    <main class="results-area">
+      <div id="results-empty" class="placeholder">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="4"/>
+        </svg>
+        <h2>No results yet</h2>
+        <p>Fill in the configuration panel and click <strong>Analyze</strong> to generate circularity predictions and lattice preview.</p>
+      </div>
+
+      <div id="results" class="hidden">
+        <div class="verdict-bar" id="verdict-banner"></div>
+
+        <div class="metrics-block">
+          <div class="ratio-display">
+            <svg viewBox="0 0 120 120" class="ratio-ring">
+              <circle cx="60" cy="60" r="52" class="ring-bg"/>
+              <circle cx="60" cy="60" r="52" class="ring-fg" id="gauge-ring"/>
+            </svg>
+            <div class="ratio-text">
+              <span id="gauge-val">—</span>
+              <small>Ratio</small>
+            </div>
+          </div>
+          <div class="metric-cards" id="metrics"></div>
+        </div>
+
+        <div class="output-grid">
+          <section class="output-card">
+            <header><h3>Lattice Preview</h3></header>
+            <div class="img-frame"><img id="lattice-img" alt="Lattice preview" /></div>
+          </section>
+          <section class="output-card output-analysis" id="verdict-box"></section>
+        </div>
+
+        <div id="optimal-hint" class="optimal-hint hidden"></div>
+
+        <button type="button" class="btn btn-report" id="btn-report">Open Engineering Report</button>
+      </div>
+
+      <div id="grid-results" class="hidden grid-block">
+        <section class="output-card">
+          <header><h3>Grid Scan</h3></header>
+          <div class="metric-cards metric-cards-row" id="grid-metrics"></div>
+          <div class="output-grid output-grid-tight">
+            <div class="output-card inner">
+              <header><h3>Heatmap</h3></header>
+              <div class="img-frame"><img id="heatmap-img" alt="Heatmap" /></div>
+            </div>
+            <div class="output-card inner">
+              <header><h3>Best Position</h3></header>
+              <div class="img-frame"><img id="best-img" alt="Best position" /></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    LatticeFlow EDM · 16 SEM calibration runs · ML + geometry engine
+  </footer>
+
+  <!-- Engineering chatbot -->
+  <button type="button" class="chat-fab" id="chat-fab" title="Ask engineering assistant">?</button>
+  <div id="chat-panel" class="chat-panel hidden">
+    <div class="chat-head">
+      <div>
+        <strong>Engineering Assistant</strong>
+        <span>ML + LLM guidance</span>
+      </div>
+      <div class="chat-head-actions">
+        <button type="button" id="chat-settings-btn" title="API key settings">&#9881;</button>
+        <button type="button" id="chat-close">&#10005;</button>
+      </div>
+    </div>
+    <div id="chat-settings" class="chat-settings hidden">
+      <label>API key <small>(Anthropic sk-ant-… or OpenAI sk-…)</small></label>
+      <input type="password" id="chat-api-key" placeholder="sk-ant-... or sk-..." autocomplete="off" />
+      <p class="chat-settings-note">Or put <code>ANTHROPIC_API_KEY</code> in a <code>.env</code> file next to web_server.py</p>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <div class="chat-msg bot">Hi — I can explain pores, nodes, struts, why your run failed, and the best (x,y) for your settings. Run <strong>Analyze</strong> first so I have your data.</div>
+    </div>
+    <form id="chat-form" class="chat-form">
+      <input type="text" id="chat-input" placeholder="e.g. Why did I fail? Best X,Y?" autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script src="/static/js/app.js?v=7"></script>
+  <script src="/static/js/chat.js?v=8"></script>
+</body>
+</html>
